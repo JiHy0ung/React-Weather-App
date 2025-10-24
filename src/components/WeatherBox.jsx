@@ -1,8 +1,9 @@
 import React from "react";
-import { Container, Typography } from "@mui/material";
+import { Container, Typography, CircularProgress, Box } from "@mui/material";
 
-const WeatherBox = ({ weather }) => {
-  console.log(weather, weather?.name);
+const WeatherBox = ({ weather, loading }) => {
+  const isLoading = loading || !weather;
+
   return (
     <Container
       sx={{
@@ -17,11 +18,27 @@ const WeatherBox = ({ weather }) => {
         borderRadius: 4,
       }}
     >
-      <Typography variant="h4">{weather?.name}</Typography>
-      <Typography>
-        {Math.floor(weather?.main.temp - 273.15)}℃ / {weather?.main.temp}℉
-      </Typography>
-      <Typography>{weather?.weather[0].description}</Typography>
+      {isLoading ? (
+        <Box
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+          sx={{ p: 0.8 }}
+        >
+          <CircularProgress color="inherit" size={48} />
+          <Typography sx={{ mt: 2 }}>날씨 정보 불러오는 중...</Typography>
+        </Box>
+      ) : (
+        <Box textAlign="center">
+          <Typography variant="h4" gutterBottom>
+            {weather?.name}
+          </Typography>
+          <Typography>
+            {Math.floor(weather?.main.temp - 273.15)}℃ / {weather?.main.temp}℉
+          </Typography>
+          <Typography>{weather?.weather[0].description}</Typography>
+        </Box>
+      )}
     </Container>
   );
 };
