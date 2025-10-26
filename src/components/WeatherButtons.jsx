@@ -4,7 +4,7 @@ import { ButtonGroup, Button } from "@mui/material";
 const WeatherButtons = ({ cities, setCity, selectedCity }) => {
   return (
     <ButtonGroup
-      variant="text" // 👈 contained → text 로 변경
+      variant="text"
       disableElevation
       sx={{
         display: "flex",
@@ -38,6 +38,11 @@ const WeatherButtons = ({ cities, setCity, selectedCity }) => {
             color: selectedCity === city ? "white" : "black",
             boxShadow:
               selectedCity === city ? "rgba(33, 162, 198, 0.39)" : "none",
+            fontSize: {
+              xs: "0.7rem",
+              sm: "0.85rem",
+              md: "1rem",
+            },
           }}
         >
           {city}
